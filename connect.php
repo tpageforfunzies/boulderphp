@@ -7,15 +7,14 @@ define('DBUSER', 'root');
 define('DBPASS', '');
 define('DBNAME', 'boulder');
 
-$conn = mysql_connect(DBHOST,DBUSER,DBPASS);
-$dbcon = mysql_select_db(DBNAME);
+global $link;
+$link = mysqli_connect(DBHOST,DBUSER,DBPASS,DBNAME);
 
-if ( !$conn ) {
-    die("Connection failed : " . mysql_error());
+
+if ( !$link ) {
+    die("Connection failed : " . mysqli_error($link));
+}
+else{
+    echo "Connection Successful";
 }
 
-if ( !$dbcon ) {
-    die("Database Connection failed : " . mysql_error());
-}
-
-?>

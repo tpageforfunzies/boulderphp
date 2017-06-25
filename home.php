@@ -2,18 +2,18 @@
 ob_start();
 session_start();
 require_once "connect.php";
-$res = mysql_query("SELECT * FROM users WHERE userId=".$_SESSION['user']);
-$userRow = mysql_fetch_array($res);
+$res = mysqli_query($link, "SELECT * FROM users WHERE userId=".$_SESSION['user']);
+$userRow = mysqli_fetch_array($res);
+global $id;
 $id = $userRow['userId'];
 
-function tableGen(){
-    $res = mysql_query("SELECT * FROM users WHERE userId=".$_SESSION['user']);
-    $userRow = mysql_fetch_array($res);
-    $id = $userRow['userId'];
+
+
+function tableGen($link, $id){
     $routesArray = [];
-    $routesRes = mysql_query("SELECT * from routes");
+    $routesRes = mysqli_query($link, "SELECT * from routes");
     $index = 0;
-    while($row = mysql_fetch_assoc($routesRes)){
+    while($row = mysqli_fetch_assoc($routesRes)){
         $routesArray[$index] = $row;
         if ($row['user'] == $id){
             echo "<tr>";
@@ -75,7 +75,7 @@ if ( isset($_POST['btn-route']) ) {
     // if there's no error, add to table
     if( !$error ) {
         $routeQuery = "INSERT INTO routes(routeName,routeGrade,sentDate, user) VALUES('$routeName','$grade','$date', '$id')";
-        $routeRes = mysql_query($routeQuery);
+        $routeRes = mysqli_query($link, $routeQuery);
     if ($routeRes) {
         $errTyp = "success";
         $errMSG = "Route Added!  Congratulations on the send!";
@@ -112,12 +112,7 @@ if ( isset($_POST['btn-route']) ) {
     <script>
     $( function() {
       $( "#datepicker" ).datepicker();
-        onSelect: function(dateText, inst) {
-              var dateAsString = dateText; //the first parameter of this function
-              var dateAsObject = $(this).datepicker( 'getDate' ); //the getDate method
-           }
-
-    } );
+    });
     </script>
 </head>
 <body>
@@ -150,7 +145,7 @@ if ( isset($_POST['btn-route']) ) {
             <th>Date Sent</th>
             <th><center>Remove Route</center></th>
         </tr>
-        <?php tableGen(); ?>
+        <?php tableGen($link, $id); ?>
     </table>
 </div>
 

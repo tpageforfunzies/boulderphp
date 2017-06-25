@@ -8,26 +8,26 @@ if (!isset($_GET['id'])){
     exit;
 }
 
-$res = mysql_query("SELECT * FROM users WHERE userId=".$_SESSION['user']);
-$userRow = mysql_fetch_array($res);
+$res = mysqli_query($link, "SELECT * FROM users WHERE userId=".$_SESSION['user']);
+$userRow = mysqli_fetch_array($res);
 $id = $userRow['userId'];
 
 
-$ruRes = mysql_query("SELECT user FROM routes WHERE routeId=".$_GET['id']);
-$ruRow = mysql_fetch_array($ruRes);
+$ruRes = mysqli_query($link, "SELECT user FROM routes WHERE routeId=".$_GET['id']);
+$ruRow = mysqli_fetch_array($ruRes);
 $userId = $ruRow['user'];
 
 if ($id == $userId){
     $delete = trim($_GET['id']);
     $delete = strip_tags($_GET['id']);
     $delete = htmlspecialchars($_GET['id']);
-    $deleteRes = mysql_query("DELETE FROM routes WHERE routeId=".$delete);
+    $delete = mysqli_real_escape_string($link, $_GET['id']);
+    $deleteRes = mysqli_query($link, "DELETE FROM routes WHERE routeId=".$delete);
     header("Location: home.php");
     echo $_GET['id'];
 }
 else{
 $msg = 'Woah there, not your climb to delete!  Try again.';
-echo '<script type="text/javascript">alert("' . $msg . '"); </script>';
 header("Location: home.php");
 
 
