@@ -2,40 +2,9 @@
 ob_start();
 session_start();
 require_once "connect.php";
-$res = mysqli_query($link, "SELECT * FROM users WHERE userId=".$_SESSION['user']);
-$userRow = mysqli_fetch_array($res);
-global $id;
-$id = $userRow['userId'];
+require_once "functions.php";
 
 
-
-function tableGen($link, $id){
-    $routesArray = [];
-    $routesRes = mysqli_query($link, "SELECT * from routes");
-    $index = 0;
-    while($row = mysqli_fetch_assoc($routesRes)){
-        $routesArray[$index] = $row;
-        if ($row['user'] == $id){
-            echo "<tr>";
-            echo "<td>";
-            echo $row['routeName'];
-            echo "</td>";
-            echo "<td>";
-            echo $row['routeGrade'];
-            echo "</td>";
-            echo "<td>";
-            echo $row['sentDate'];
-            echo "</td>";
-            echo "<td align='center'>";
-            echo "<a href=";
-            echo '"delete.php?id=';
-            echo $row['routeId'];
-            echo '">Delete</a>';
-            echo "</td></tr>";
-        }
-        $index++;
-    }
-}
 
 
 
@@ -109,20 +78,100 @@ if ( isset($_POST['btn-route']) ) {
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-    $( function() {
-      $( "#datepicker" ).datepicker();
-    });
-    </script>
 </head>
 <body>
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Debug Box</h3>
+      <h3 class="panel-title">Debug Box:</h3><br>
+    <?php 
+      if ( !$link ) {
+        die("Connection failed : " . mysqli_error($link));
+      }
+      else{
+          echo "Connection Successful";
+      }
+      ?>
   </div>
-  <div class="panel-body">
-    <p>Date: <input type="text" id="datepicker"></p>
-  </div>
+</div>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h2 class="panel-title">Submit a Sent Route</h2>
+    </div>
+    <div class="panel-body">
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
+            Route Name: <input type="text" name="routeName"><br>
+            Grade (V):
+                <select id="grade" name="grade">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                </select><br>
+            Date Sent:<BR>
+                   Month:<select id="date" name="date">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                    </select>
+                   Day:<select id="date" name="date">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                </select>Year:<select id="date" name="date">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                </select><br>
+            <button type="submit" value="Submit" name="btn-route">SUBMIT ROUTE</button>
+        </form>
+    </div>
 </div>
 <div class="panel panel-primary">
     <div class="panel-heading">
@@ -145,24 +194,22 @@ if ( isset($_POST['btn-route']) ) {
             <th>Date Sent</th>
             <th><center>Remove Route</center></th>
         </tr>
-        <?php tableGen($link, $id); ?>
+        <?php tableGen($link, $id, $routesRes); ?>
     </table>
 </div>
-
-<div class="panel panel-info">
-    <div class="panel-heading">
-        <h2 class="panel-title">Submit a Sent Route</h2>
-    </div>
-    <div class="panel-body">
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
-            Route Name: <input type="text" name="routeName"><br>
-            Grade: <input type="text" name="grade"><br>
-            Date Sent: <input type="text" name="date"><br>
-            <button type="submit" value="Submit" name="btn-route">SUBMIT ROUTE</button>
-        </form>
-    </div>
+<div class="panel panel-success col-md-6">
+  <div class="panel-heading">Your Climbing Statistics</div>
+  <div class="panel-body">
+    <p>Feature climbing stats according to your list of sent routes.</p>
+  </div>
+    <ul class="list-group">
+      <li class="list-group-item">Your average grade is: V<?php echo getAvg($link, $id, $routesRes);?>
+      </li>
+      <li class="list-group-item">Your highest grade is: V</li>
+      <li class="list-group-item">Your lowest grade is: V</li>
+    </ul>
 </div>
-<div class="panel panel-success">
+<div class="panel panel-success col-md-6">
   <div class="panel-heading">Your Climbing Statistics</div>
   <div class="panel-body">
     <p>Feature climbing stats according to your list of sent routes.</p>
