@@ -17,5 +17,5 @@ $routesRes = mysqli_query($link, "SELECT * from routes");
 
 global $id;
 $userRes = mysqli_query($link, "SELECT * FROM users WHERE userId=".$_SESSION['user']);
-$userRow = mysqli_fetch_array($userRes);
+$userRow = mysqli_fetch_assoc($userRes);
 $id = $userRow['userId'];

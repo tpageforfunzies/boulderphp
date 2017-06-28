@@ -4,65 +4,11 @@ session_start();
 require_once "connect.php";
 require_once "functions.php";
 
-
-
-
-
-
 if( !isset($_SESSION["user"]) ){
     header("Location: index.php");
     exit;
 }
-
-if ( isset($_POST['btn-route']) ) {
-
-    // clean user inputs to prevent sql injections
-    $routeName = trim($_POST['routeName']);
-    $routeName = strip_tags($routeName);
-    $routeName = htmlspecialchars($routeName);
-
-    $grade = trim($_POST['grade']);
-    $grade = strip_tags($grade);
-    $grade = htmlspecialchars($grade);
-
-    $date = trim($_POST['date']);
-    $date = strip_tags($date);
-    $date = htmlspecialchars($date);
-
-    // basic name validation
-    if (empty($routeName)) {
-        $error = true;
-        $nameError = "Please enter a route name.";
-    } else if (strlen($routeName) < 3) {
-        $error = true;
-        $nameError = "Route name must have atleat 3 characters.";
-    } else if (!preg_match("/^[a-zA-Z ]+$/",$routeName)) {
-        $error = true;
-        $nameError = "Route name must contain alphabets and space.";
-    }
-
-    // if there's no error, add to table
-    if( !$error ) {
-        $routeQuery = "INSERT INTO routes(routeName,routeGrade,sentDate, user) VALUES('$routeName','$grade','$date', '$id')";
-        $routeRes = mysqli_query($link, $routeQuery);
-    if ($routeRes) {
-        $errTyp = "success";
-        $errMSG = "Route Added!  Congratulations on the send!";
-        unset($routeName);
-        unset($grade);
-        unset($date);
-        unset($id);
-        unset($_POST);
-        header('location:home.php');
-    } else {
-        $errTyp = "danger";
-        $errMSG = "Something went wrong, try again later...";
-        }
-    }
-} //close if issetPOST
-
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,11 +35,13 @@ if ( isset($_POST['btn-route']) ) {
       }
       else{
           echo "Connection Successful";
+          echo "<br>";
       }
       ?>
   </div>
 </div>
-<div class="panel panel-info">
+<div class="panel panel-info col-md-6">
+
     <div class="panel-heading">
         <h2 class="panel-title">Submit a Sent Route</h2>
     </div>
@@ -118,62 +66,24 @@ if ( isset($_POST['btn-route']) ) {
                     <option>14</option>
                     <option>15</option>
                 </select><br>
-            Date Sent:<BR>
-                   Month:<select id="date" name="date">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                    <option>11</option>
-                    <option>12</option>
-                    <option>13</option>
-                    <option>14</option>
-                    <option>15</option>
-                    </select>
-                   Day:<select id="date" name="date">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                    <option>11</option>
-                    <option>12</option>
-                    <option>13</option>
-                    <option>14</option>
-                    <option>15</option>
-                </select>Year:<select id="date" name="date">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                    <option>11</option>
-                    <option>12</option>
-                    <option>13</option>
-                    <option>14</option>
-                    <option>15</option>
-                </select><br>
+            Date Sent:<input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" /><br>
             <button type="submit" value="Submit" name="btn-route">SUBMIT ROUTE</button>
         </form>
     </div>
 </div>
-<div class="panel panel-primary">
+<div class="panel panel-info col-md-6">
+
+    <div class="panel-heading">
+        <h2 class="panel-title">Search For Another Climber</h2>
+    </div>
+    <div class="panel-body">
+     <form method="POST" autocomplete="off">
+            Climber's Email: <input type="text" name="emailSearch"><br>
+            <button type="submit" value="Submit" name="btn-search">SEARCH</button>
+        </form>
+    </div>
+</div>
+<div class="panel panel-primary col-md-12">
     <div class="panel-heading">
         <h3 class="panel-title">BoulderTracker</h3>
     </div>
@@ -198,29 +108,52 @@ if ( isset($_POST['btn-route']) ) {
     </table>
 </div>
 <div class="panel panel-success col-md-6">
-  <div class="panel-heading">Your Climbing Statistics</div>
+  <div class="panel-heading">Your Overall Climbing Statistics!</div>
   <div class="panel-body">
     <p>Feature climbing stats according to your list of sent routes.</p>
   </div>
     <ul class="list-group">
-      <li class="list-group-item">Your average grade is: V<?php echo getAvg($link, $id, $routesRes);?>
+      <li class="list-group-item">Your average grade is: V<?php getAvg($link, $id, $routesRes);?>
       </li>
-      <li class="list-group-item">Your highest grade is: V</li>
-      <li class="list-group-item">Your lowest grade is: V</li>
+      <li class="list-group-item">Your highest grade is: V<?php getMax($link, $id, $routesRes);?>
+      </li>
+      <li class="list-group-item">Your lowest grade is: V<?php getMin($link, $id, $routesRes);?></li>
     </ul>
 </div>
 <div class="panel panel-success col-md-6">
-  <div class="panel-heading">Your Climbing Statistics</div>
+  <div class="panel-heading">Filter Your Statistics!</div>
   <div class="panel-body">
-    <p>Feature climbing stats according to your list of sent routes.</p>
+    <p>Choose your time frame and find out your stats!</p>
+        <form name="Filter" method="POST">
+        From:
+        <input type="date" name="dateFrom" value="<?php echo date('Y-m-d'); ?>" />
+        <br/>
+        To:   
+        <input type="date" name="dateTo" value="<?php echo date('Y-m-d'); ?>" />
+        <input type="submit" name="btn-filter" value="Filter"/>
+        </form>
   </div>
     <ul class="list-group">
-      <li class="list-group-item">Your average grade is: </li>
-      <li class="list-group-item">Your highest grade is: </li>
-      <li class="list-group-item">Your lowest grade is: </li>
+      <li class="list-group-item">Your average grade is: V<?php 
+          if ( isset($_POST['btn-filter']) ) {
+              filterAvg($link, $id, $routesRes);
+          }
+          ?>  
+     </li>
+      <li class="list-group-item">Your highest grade is: V<?php 
+          if ( isset($_POST['btn-filter']) ) {
+              filterMax($link, $id, $routesRes);
+          }
+          ?>  
+      </li>
+      <li class="list-group-item">Your lowest grade is: V<?php 
+          if ( isset($_POST['btn-filter']) ) {
+              filterMin($link, $id, $routesRes);
+          }
+          ?></li>
     </ul>
 </div>
-<div class="panel panel-danger">
+<div class="panel panel-danger col-md-12">
   <div class="panel-heading">
 <h3><a href="logout.php?logout">LOG OUT</a></h3>
   </div>
