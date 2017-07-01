@@ -1,11 +1,12 @@
 <?php
-ob_start();
-session_start();
 error_reporting(-1);
+ob_start();
+
 
 require_once "connect.php";
 require_once "home.php";
 
+//add route
 if ( isset($_POST['btn-route']) ) {
 
     // clean user inputs to prevent sql injections
@@ -37,31 +38,21 @@ if ( isset($_POST['btn-route']) ) {
     if( !$error ) {
         $routeQuery = "INSERT INTO routes(routeName,routeGrade,sentDate, user) VALUES('$routeName','$grade','$date', '$id')";
         $routeRes = mysqli_query($link, $routeQuery);
-    if ($routeRes) {
-        $errTyp = "success";
-        $errMSG = "Route Added!  Congratulations on the send!";
-        unset($routeName);
-        unset($grade);
-        unset($date);
-        unset($id);
-        unset($_POST);
-        header('location:home.php');
-    } else {
-        $errTyp = "danger";
-        $errMSG = "Something went wrong, try again later...";
-        }
+        if ($routeRes) {
+            $errTyp = "success";
+            $errMSG = "Route Added!  Congratulations on the send!";
+            unset($routeName);
+            unset($grade);
+            unset($date);
+            unset($id);
+            unset($_POST);
+            header('location:home.php');
+        } else {
+            $errTyp = "danger";
+            $errMSG = "Something went wrong, try again later...";
+            }
     }
 }
-
-if ( isset($_POST['btn-search']) ) {
-        header("Location: search.php");
-
-    
-    
-}
-
-
-
 
 function filterAvg($link, $id, $routesRes){
     $fromDate = ($_POST['dateFrom']);
@@ -103,7 +94,11 @@ ORDER by routeId DESC";
             }
         }
     }
-    echo $f_Max;
+        if ($f_Max > 0){
+            echo $f_Max; }
+        else{
+            echo "Log some routes and find out!";
+            }
     }
 }
 function filterMin($link, $id, $routesRes){
@@ -136,7 +131,12 @@ function getMax($link, $id, $routesRes){
                 $max = $maxRow['routeGrade'];
             }
     }
-    echo $max;
+    if ($max > 0){
+        echo $max; 
+    }
+    else {
+        echo " - Log some routes and find out!";
+    }
 }
 
 
@@ -149,8 +149,13 @@ function getAvg($link, $id, $routesRes){
             $avgIndex++;
         }
     }
-    $avg /= $avgIndex;
-    echo $avg;
+    if ($avgIndex > 0){
+        $avg /= $avgIndex;
+        echo $avg; 
+    }
+    else {
+        echo " - Log some routes and find out!";
+    }
 }
 
 function getMin($link, $id, $routesRes){
@@ -161,7 +166,12 @@ function getMin($link, $id, $routesRes){
                 $min = $minRow['routeGrade'];
             }
     }
-    echo $min;
+    if ($min < 16){
+        echo $min; 
+    }
+    else {
+        echo " - Log some routes and find out!";
+    }
 }
 
 

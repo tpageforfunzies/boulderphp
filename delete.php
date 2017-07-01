@@ -1,5 +1,4 @@
 <?php
-ob_start();
 session_start();
 require_once "connect.php";
 require_once "home.php";
@@ -16,6 +15,7 @@ $ruRow = mysqli_fetch_array($ruRes);
 $userId = $ruRow['user'];
 
 if ($id == $userId){
+    $delete = mysqli_real_escape_string($link, $_GET['id']);
     $delete = trim($_GET['id']);
     $delete = strip_tags($_GET['id']);
     $delete = htmlspecialchars($_GET['id']);
@@ -24,10 +24,7 @@ if ($id == $userId){
     echo $_GET['id'];
 }
 else{
-$msg = 'Woah there, not your climb to delete!  Try again.';
-header("Location: home.php");
-
-
+    echo '<script type="text/javascript">alert("Not your climb to delete! Nice try.");</script>';
+    echo '<script>self.location = "home.php";</script>';
 }
-
-
+?>

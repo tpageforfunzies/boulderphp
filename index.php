@@ -12,7 +12,7 @@ if ( isset($_SESSION['user'])!="" ) {
 
 $error = false;
 
-    if( isset($_POST['btn-login']) ) {
+if( isset($_POST['btn-login']) ) {
 
   // prevent sql injections/ clear user invalid inputs
   $email = trim($_POST['email']);
@@ -61,13 +61,35 @@ $error = false;
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>BoulderTracker</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 <body>
 
 <div class="container">
+
+ <div class="jumbotron">
+  <h1>What's Up!  Thanks for trying out the app!</h1>
+  
+  <p>This is where I'll periodically post updates about what has changed or is being worked on.</p>
+     <p>Current Version: 1.1</p><br>
+  Ready for Testing:
+  <ul>
+      <li>Search should completely work now! <br> (try it with "tjpage@indiana.edu" or "test@tester.com")
+      </li>
+ </ul>
+ 
+ In Progress:
+ <ul>
+      <li>Commenting on other people's climbs</li>
+      <li>Getting List of Users</li>
+      <li>User profile pages</li>
+      <li>Password Recovery/Change</li>
+ </ul>
+ 
+</div>
 
  <div id="login-form">
     <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off">
