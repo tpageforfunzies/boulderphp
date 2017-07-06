@@ -93,7 +93,7 @@ if ( isset($_POST['btn-search']) ) {
             <th>Route/Problem Name</th>
             <th>Grade</th>
             <th>Date Sent</th>
-            <th><center>Remove Route</center></th>
+            <th style="text-align: center;">Remove Route</th>
         </tr>
         <?php tableGen($link, $id, $routesRes); ?>
     </table>

@@ -113,7 +113,7 @@ if( isset($_POST['btn-login']) ) {
     <span class="glyphicon glyphicon-info-sign"></span> <?php echo $errMSG; ?>
                 </div>
              </div>
-                <?php
+    <?php
    }
    ?>
 
