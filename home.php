@@ -1,8 +1,8 @@
 <?php
 ob_start();
 session_start();
-require_once "connect.php";
-require_once "functions.php";
+include "connect.php";
+include "functions.php";
 
 if( !isset($_SESSION["user"]) ){
     header("Location: index.php");

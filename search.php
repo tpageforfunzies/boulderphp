@@ -3,46 +3,22 @@ session_start();
 ob_start();
 
 
-require_once "connect.php";
-require_once "search_functions.php";
+include "connect.php";
+include "functions.php";
 
 //set and sanitize email from input
 $search = $_SESSION['search'];
 $search = mysqli_real_escape_string($link, $search);
 
 //gets userId and userName of searched e-mail
-$searchRes = mysqli_query($link, "SELECT * FROM users WHERE                userEmail='$search'");
+$searchRes = mysqli_query($link, "SELECT * FROM users WHERE userEmail='$search'");
 $searchRow = mysqli_fetch_array($searchRes);
 if (!$searchRow){
-    echo '<script type="text/javascript">alert("Noone has registered with that e-mail");</script>';
+    echo '<script type="text/javascript">alert("No one has registered with that e-mail");</script>';
     echo '<script>self.location = "home.php";</script>';
 }
 $searchId = $searchRow['userId'];
 $searchName = $searchRow['userName'];
-
-function searchTable($link, $id, $searchId){
-    //loops through routes, printing routes with matching userId
-    $index = 0;
-    $searchArray = [];
-    $routesRes = mysqli_query($link, "SELECT * from routes");
-    while($row = mysqli_fetch_assoc($routesRes)){
-        $searchArray[$index] = $row;
-        if ($row['user'] == $searchId){
-            echo "<tr>";
-            echo "<td>";
-            echo $row['routeName'];
-            echo "</td>";
-            echo "<td>";
-            echo "V";
-            echo $row['routeGrade'];
-            echo "</td>";
-            echo "<td>";
-            echo date('m-d-Y', strtotime($row['sentDate']));
-            echo "</td>";
-        }
-        $index++;
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -106,10 +82,10 @@ function searchTable($link, $id, $searchId){
     <p>Choose your time frame and find out <?php echo $searchName; ?>'s stats!</p>
         <form name="Filter" method="POST">
         From:
-        <input type="date" name="searchFrom" value="<?php echo date('Y-m-d'); ?>" />
+        <input type="date" name="dateFrom" value="<?php echo date('Y-m-d'); ?>" />
         <br/>
         To:   
-        <input type="date" name="searchTo" value="<?php echo date('Y-m-d'); ?>" />
+        <input type="date" name="dateTo" value="<?php echo date('Y-m-d'); ?>" />
         <input type="submit" name="search-filter" value="Filter"/>
         </form>
   </div>

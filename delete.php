@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once "connect.php";
-require_once "home.php";
+include "connect.php";
+include "home.php";
 
 if (!isset($_GET['id'])){
     echo "Error: No ID was given.";

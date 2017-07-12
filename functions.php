@@ -3,8 +3,7 @@ error_reporting(-1);
 ob_start();
 
 
-require_once "connect.php";
-require_once "home.php";
+include "connect.php";
 
 //add route
 if ( isset($_POST['btn-route']) ) {
@@ -72,6 +71,7 @@ ORDER by routeId DESC";
         }
     }
     $f_avg /= $f_avgIndex;
+    $f_avg = round( $f_avg, 2, PHP_ROUND_HALF_UP);
     echo $f_avg;
         return $fromDate;
         return $toDate;
@@ -151,6 +151,7 @@ function getAvg($link, $id, $routesRes){
     }
     if ($avgIndex > 0){
         $avg /= $avgIndex;
+        $avg = round( $avg, 2, PHP_ROUND_HALF_UP);
         echo $avg; 
     }
     else {
@@ -178,7 +179,7 @@ function getMin($link, $id, $routesRes){
 function tableGen($link, $id, $routesRes){
     $index = 0;
     $routesArray = [];
-    $routesRes = mysqli_query($link, "SELECT * from routes");
+    $routesRes = mysqli_query($link, "SELECT * from routes ORDER by sentDate DESC");
     while($row = mysqli_fetch_assoc($routesRes)){
         $routesArray[$index] = $row;
         if ($row['user'] == $id){
@@ -199,6 +200,29 @@ function tableGen($link, $id, $routesRes){
             echo $row['routeId'];
             echo '">Delete</a>';
             echo "</td></tr>";
+        }
+        $index++;
+    }
+}
+function searchTable($link, $id, $searchId){
+    //loops through routes, printing routes with matching userId
+    $index = 0;
+    $searchArray = [];
+    $routesRes = mysqli_query($link, "SELECT * from routes ORDER by sentDate DESC");
+    while($row = mysqli_fetch_assoc($routesRes)){
+        $searchArray[$index] = $row;
+        if ($row['user'] == $searchId){
+            echo "<tr>";
+            echo "<td>";
+            echo $row['routeName'];
+            echo "</td>";
+            echo "<td>";
+            echo "V";
+            echo $row['routeGrade'];
+            echo "</td>";
+            echo "<td>";
+            echo date('m-d-Y', strtotime($row['sentDate']));
+            echo "</td>";
         }
         $index++;
     }
