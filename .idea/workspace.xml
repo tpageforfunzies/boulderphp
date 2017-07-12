@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6dc5cc49-ff63-4654-a285-948154222d76" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/search_functions.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/delete.php" afterPath="$PROJECT_DIR$/delete.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/functions.php" afterPath="$PROJECT_DIR$/functions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home.php" afterPath="$PROJECT_DIR$/home.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/search.php" afterPath="$PROJECT_DIR$/search.php" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -127,8 +123,8 @@
       <file leaf-file-name="home.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/home.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="18" column="6" lean-forward="true" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+            <state relative-caret-position="273">
+              <caret line="13" column="35" lean-forward="true" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -352,7 +348,7 @@
       <workItem from="1498615492142" duration="164000" />
       <workItem from="1499040778426" duration="1281000" />
       <workItem from="1499043160350" duration="497000" />
-      <workItem from="1499881375507" duration="1497000" />
+      <workItem from="1499881375507" duration="1605000" />
     </task>
     <task id="LOCAL-00001" summary="DB">
       <created>1498325402280</created>
@@ -361,11 +357,18 @@
       <option name="project" value="LOCAL" />
       <updated>1498325402280</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added sort by date to table gen functions&#10;added rounding to average functions&#10;changed requires to includes&#10;removed need for search_functions.php">
+      <created>1499882963402</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1499882963402</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57531000" />
+    <option name="totallyTimeSpent" value="57639000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
@@ -424,7 +427,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="DB" />
-    <option name="LAST_COMMIT_MESSAGE" value="DB" />
+    <MESSAGE value="added sort by date to table gen functions&#10;added rounding to average functions&#10;changed requires to includes&#10;removed need for search_functions.php" />
+    <option name="LAST_COMMIT_MESSAGE" value="added sort by date to table gen functions&#10;added rounding to average functions&#10;changed requires to includes&#10;removed need for search_functions.php" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -454,13 +458,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
           <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
-          <folding>
-            <marker date="1498892772690" expanded="true" signature="132:166" ph="SELECT * FRO... routes" />
-            <marker date="1498892772690" expanded="true" signature="946:980" ph="SELECT * FRO... routes" />
-            <marker date="1498892772690" expanded="true" signature="1586:1694" ph="SELECT * FRO... routes" />
-            <marker date="1498892772690" expanded="true" signature="2270:2378" ph="SELECT * FRO... routes" />
-            <marker date="1498892772690" expanded="true" signature="2916:3024" ph="SELECT * FRO... routes" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -566,13 +564,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
           <caret line="2" column="11" lean-forward="true" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
-          <folding>
-            <marker date="1498892772690" expanded="true" signature="132:166" ph="SELECT * FRO... routes" />
-            <marker date="1498892772690" expanded="true" signature="946:980" ph="SELECT * FRO... routes" />
-            <marker date="1498892772690" expanded="true" signature="1586:1694" ph="SELECT * FRO... routes" />
-            <marker date="1498892772690" expanded="true" signature="2270:2378" ph="SELECT * FRO... routes" />
-            <marker date="1498892772690" expanded="true" signature="2916:3024" ph="SELECT * FRO... routes" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -816,13 +808,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-294">
           <caret line="26" column="52" lean-forward="true" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
-          <folding>
-            <marker date="1498892772690" expanded="true" signature="132:166" ph="SELECT * FRO... routes" />
-            <marker date="1498892772690" expanded="true" signature="946:980" ph="SELECT * FRO... routes" />
-            <marker date="1498892772690" expanded="true" signature="1586:1694" ph="SELECT * FRO... routes" />
-            <marker date="1498892772690" expanded="true" signature="2270:2378" ph="SELECT * FRO... routes" />
-            <marker date="1498892772690" expanded="true" signature="2916:3024" ph="SELECT * FRO... routes" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -867,8 +853,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/home.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="18" column="6" lean-forward="true" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+        <state relative-caret-position="273">
+          <caret line="13" column="35" lean-forward="true" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
           <folding />
         </state>
       </provider>
