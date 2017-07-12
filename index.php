@@ -74,11 +74,12 @@ if( isset($_POST['btn-login']) ) {
   <h1>What's Up!  Thanks for trying out the app!</h1>
   
   <p>This is where I'll periodically post updates about what has changed or is being worked on.</p>
-     <p>Current Version: 1.1</p><br>
-  Ready for Testing:
+     <p>Current Version: 1.2</p><br>
+  Recent Changes:
   <ul>
-      <li>Search should completely work now! <br> (try it with "tjpage@indiana.edu" or "test@tester.com")
-      </li>
+      <li>Search should completely work now! <br> (try it with "tjpage@indiana.edu" or "test@tester.com")</li>
+      <li>Navigation bar for top of screen will now control route submission, search, and logging out</li>
+      <li>Minor optimization changes, should be slightly faster to load</li>
  </ul>
  
  In Progress:
