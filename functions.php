@@ -6,7 +6,7 @@ ob_start();
 include "connect.php";
 
 //add route
-if ( isset($_POST['btn-route']) ) {
+if (isset($_POST['btn-route'])) {
 
     // clean user inputs to prevent sql injections
     $routeName = trim($_POST['routeName']);
@@ -28,13 +28,13 @@ if ( isset($_POST['btn-route']) ) {
     } else if (strlen($routeName) < 3) {
         $error = true;
         $nameError = "Route name must have atleat 3 characters.";
-    } else if (!preg_match("/^[a-zA-Z ]+$/",$routeName)) {
+    } else if (!preg_match("/^[a-zA-Z ]+$/", $routeName)) {
         $error = true;
         $nameError = "Route name must contain alphabets and space.";
     }
 
     // if there's no error, add to table
-    if( !$error ) {
+    if (!$error) {
         $routeQuery = "INSERT INTO routes(routeName,routeGrade,sentDate, user) VALUES('$routeName','$grade','$date', '$id')";
         $routeRes = mysqli_query($link, $routeQuery);
         if ($routeRes) {
@@ -49,140 +49,145 @@ if ( isset($_POST['btn-route']) ) {
         } else {
             $errTyp = "danger";
             $errMSG = "Something went wrong, try again later...";
-            }
+        }
     }
 }
 
-function filterAvg($link, $id, $routesRes){
+function filterAvg($link, $id, $routesRes)
+{
     $fromDate = ($_POST['dateFrom']);
     $toDate = ($_POST['dateTo']);
-    if ($toDate > date('Y-m-d')){
+    if ($toDate > date('Y-m-d')) {
         echo '<script type="text/javascript">alert("I know this is awesome, but it can\'t predict the future yet!");</script>';
-    }else {
+    } else {
         $filterQuery = "SELECT * FROM routes WHERE sentDate BETWEEN '" . $fromDate . "' AND  '" . $toDate . "'
 ORDER by routeId DESC";
-    $filterRes = mysqli_query($link, $filterQuery);
-    $f_avg = 0;
-    $f_avgIndex = 0;
-    while($filterRow = mysqli_fetch_assoc($filterRes)){
-        if ($filterRow['user'] == $id){
-            $f_avg += $filterRow['routeGrade'];
-            $f_avgIndex++;
+        $filterRes = mysqli_query($link, $filterQuery);
+        $f_avg = 0;
+        $f_avgIndex = 0;
+        while ($filterRow = mysqli_fetch_assoc($filterRes)) {
+            if ($filterRow['user'] == $id) {
+                $f_avg += $filterRow['routeGrade'];
+                $f_avgIndex++;
+            }
         }
-    }
-    $f_avg /= $f_avgIndex;
-    $f_avg = round( $f_avg, 2, PHP_ROUND_HALF_UP);
-    echo $f_avg;
+        $f_avg /= $f_avgIndex;
+        $f_avg = round($f_avg, 2, PHP_ROUND_HALF_UP);
+        echo $f_avg;
         return $fromDate;
         return $toDate;
     }
-    
+
 }
-function filterMax($link, $id, $routesRes){
+
+function filterMax($link, $id, $routesRes)
+{
     $fromDate = ($_POST['dateFrom']);
     $toDate = ($_POST['dateTo']);
-    if ($toDate > date('Y-m-d')){        
-    }else {
-    $filterQuery = "SELECT * FROM routes WHERE sentDate BETWEEN '" . $fromDate . "' AND  '" . $toDate . "'
+    if ($toDate > date('Y-m-d')) {
+    } else {
+        $filterQuery = "SELECT * FROM routes WHERE sentDate BETWEEN '" . $fromDate . "' AND  '" . $toDate . "'
 ORDER by routeId DESC";
-    $filterRes = mysqli_query($link, $filterQuery);
-    $f_Max = 0;
-    while($f_MaxRow = mysqli_fetch_assoc($filterRes)){
-        if ($f_MaxRow['user'] == $id){
-            if ($f_MaxRow['routeGrade'] >= $f_Max){
-                $f_Max = $f_MaxRow['routeGrade'];
+        $filterRes = mysqli_query($link, $filterQuery);
+        $f_Max = 0;
+        while ($f_MaxRow = mysqli_fetch_assoc($filterRes)) {
+            if ($f_MaxRow['user'] == $id) {
+                if ($f_MaxRow['routeGrade'] >= $f_Max) {
+                    $f_Max = $f_MaxRow['routeGrade'];
+                }
             }
         }
-    }
-        if ($f_Max > 0){
-            echo $f_Max; }
-        else{
+        if ($f_Max > 0) {
+            echo $f_Max;
+        } else {
             echo "Log some routes and find out!";
-            }
+        }
     }
 }
-function filterMin($link, $id, $routesRes){
+
+function filterMin($link, $id, $routesRes)
+{
     $f_Min = 16;
     $fromDate = ($_POST['dateFrom']);
     $toDate = ($_POST['dateTo']);
-    if ($toDate > date('Y-m-d')){        
-    }
-    else {
-    $filterQuery = "SELECT * FROM routes WHERE sentDate BETWEEN '" . $fromDate . "' AND  '" . $toDate . "'
+    if ($toDate > date('Y-m-d')) {
+    } else {
+        $filterQuery = "SELECT * FROM routes WHERE sentDate BETWEEN '" . $fromDate . "' AND  '" . $toDate . "'
 ORDER by routeId DESC";
-    $filterRes = mysqli_query($link, $filterQuery);
-    while($f_MinRow = mysqli_fetch_assoc($filterRes)){
-        if ($f_MinRow['user'] == $id){
-            if ($f_MinRow['routeGrade'] <= $f_Min){
-                $f_Min = $f_MinRow['routeGrade'];
+        $filterRes = mysqli_query($link, $filterQuery);
+        while ($f_MinRow = mysqli_fetch_assoc($filterRes)) {
+            if ($f_MinRow['user'] == $id) {
+                if ($f_MinRow['routeGrade'] <= $f_Min) {
+                    $f_Min = $f_MinRow['routeGrade'];
+                }
             }
         }
-    }
-    echo $f_Min;
+        echo $f_Min;
     }
 }
 
 
-function getMax($link, $id, $routesRes){
+function getMax($link, $id, $routesRes)
+{
     $max = 0;
-    $result = mysqli_query($link, "SELECT * FROM `routes` WHERE user=".$id);
-    while($maxRow = mysqli_fetch_assoc($result)){
-        if ($maxRow['routeGrade'] >= $max){
-                $max = $maxRow['routeGrade'];
-            }
+    $result = mysqli_query($link, "SELECT * FROM `routes` WHERE user=" . $id);
+    while ($maxRow = mysqli_fetch_assoc($result)) {
+        if ($maxRow['routeGrade'] >= $max) {
+            $max = $maxRow['routeGrade'];
+        }
     }
-    if ($max > 0){
-        echo $max; 
-    }
-    else {
+    if ($max > 0) {
+        echo $max;
+    } else {
         echo " - Log some routes and find out!";
     }
 }
 
 
-function getAvg($link, $id, $routesRes){
+function getAvg($link, $id, $routesRes)
+{
     $avg = 0;
     $avgIndex = 0;
-    while($avgRow = mysqli_fetch_assoc($routesRes)){
-        if ($avgRow['user'] == $id){
+    while ($avgRow = mysqli_fetch_assoc($routesRes)) {
+        if ($avgRow['user'] == $id) {
             $avg += $avgRow['routeGrade'];
             $avgIndex++;
         }
     }
-    if ($avgIndex > 0){
+    if ($avgIndex > 0) {
         $avg /= $avgIndex;
-        $avg = round( $avg, 2, PHP_ROUND_HALF_UP);
-        echo $avg; 
-    }
-    else {
+        $avg = round($avg, 2, PHP_ROUND_HALF_UP);
+        echo $avg;
+    } else {
         echo " - Log some routes and find out!";
     }
 }
 
-function getMin($link, $id, $routesRes){
+function getMin($link, $id, $routesRes)
+{
     $min = 16;
-    $minRes = mysqli_query($link, "SELECT * FROM `routes` WHERE user=".$id);
-    while($minRow = mysqli_fetch_assoc($minRes)){
-        if ($minRow['routeGrade'] <= $min){
-                $min = $minRow['routeGrade'];
-            }
+    $minRes = mysqli_query($link, "SELECT * FROM `routes` WHERE user=" . $id);
+    while ($minRow = mysqli_fetch_assoc($minRes)) {
+        if ($minRow['routeGrade'] <= $min) {
+            $min = $minRow['routeGrade'];
+        }
     }
-    if ($min < 16){
-        echo $min; 
-    }
-    else {
+    if ($min < 16) {
+        echo $min;
+    } else {
         echo " - Log some routes and find out!";
     }
 }
 
 
-function tableGen($link, $id, $routesRes){
+function tableGen($link, $id, $routesRes)
+{
     $index = 0;
     $routesArray = [];
     $routesRes = mysqli_query($link, "SELECT * from routes ORDER by sentDate DESC");
-    while($row = mysqli_fetch_assoc($routesRes)){
+    while ($row = mysqli_fetch_assoc($routesRes)) {
         $routesArray[$index] = $row;
-        if ($row['user'] == $id){
+        if ($row['user'] == $id) {
             echo "<tr>";
             echo "<td>";
             echo $row['routeName'];
@@ -204,14 +209,16 @@ function tableGen($link, $id, $routesRes){
         $index++;
     }
 }
-function searchTable($link, $id, $searchId){
+
+function searchTable($link, $id, $searchId)
+{
     //loops through routes, printing routes with matching userId
     $index = 0;
     $searchArray = [];
     $routesRes = mysqli_query($link, "SELECT * from routes ORDER by sentDate DESC");
-    while($row = mysqli_fetch_assoc($routesRes)){
+    while ($row = mysqli_fetch_assoc($routesRes)) {
         $searchArray[$index] = $row;
-        if ($row['user'] == $searchId){
+        if ($row['user'] == $searchId) {
             echo "<tr>";
             echo "<td>";
             echo $row['routeName'];
@@ -227,4 +234,5 @@ function searchTable($link, $id, $searchId){
         $index++;
     }
 }
+
 ?>
