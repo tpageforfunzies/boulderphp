@@ -106,17 +106,21 @@ if (isset($_POST['btn-search'])) {
                     </div>
 
                     <div class="btn-group">
-                        <button type="button" class="btn btn-danger"><a href="logout.php?logout">LOG OUT</a></button>
+                        <a class="listbtn" href="#">List of Climbers</a>
                     </div>
 
                     <div class="btn-group">
-                        <button type="button" class="btn btn-success"><a href="#">List of Climbers</a></button>
+                        <a class="profilebtn" href="#">Your Profile</a>
+                    </div>
+
+                    <div class="btn-group">
+                        <a class="logoutbtn" href="logout.php?logout">Log Out</a>
                     </div>
 
 
     </nav>
 
-    <div class="panel panel-primary col-md-12">
+    <div id="mainTable" class="panel panel-primary col-md-12">
         <div class="panel-heading">
             <h3 style="text-align:center" class="panel-title">BoulderTracker</h3>
         </div>
