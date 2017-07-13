@@ -105,6 +105,58 @@
     }
 }
 
+/* gives the navbar space at the top of the page */
 body {
     padding-top: 70px;
+    background-color: cadetblue;
+
+}
+
+.deletebtn {
+    background-color: #af312c;
+    color: white;
+    padding: 8px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.listbtn {
+    background-color: #24cc4b;
+    color: white;
+    padding: 8px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.profilebtn {
+    background-color: sandybrown;
+    color: white;
+    padding: 8px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.logoutbtn {
+    background-color: #af312c;
+    color: white;
+    padding: 8px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+#mainTable {
+    background-color: cadetblue;
+    color: white;
+}
+
+.navbar {
+    background-color: aliceblue;
+}
+
+.panel-primary {
+    background-color: black;
 }
