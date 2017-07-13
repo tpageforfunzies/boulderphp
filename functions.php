@@ -200,7 +200,7 @@ function tableGen($link, $id, $routesRes)
             echo date('m-d-Y', strtotime($row['sentDate']));
             echo "</td>";
             echo "<td align='center'>";
-            echo "<a href=";
+            echo "<a class='deletebtn' href=";
             echo '"delete.php?id=';
             echo $row['routeId'];
             echo '">Delete</a>';

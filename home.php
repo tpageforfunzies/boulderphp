@@ -101,8 +101,19 @@ if (isset($_POST['btn-search'])) {
                                     <button type="submit" value="Submit" name="btn-search">Search</button>
                                 </form>
                             </li>
+
                         </ul>
+                    </div>
+
+                    <div class="btn-group">
                         <button type="button" class="btn btn-danger"><a href="logout.php?logout">LOG OUT</a></button>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success"><a href="#">List of Climbers</a></button>
+                    </div>
+
+
     </nav>
 
     <div class="panel panel-primary col-md-12">

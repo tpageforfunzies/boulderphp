@@ -105,6 +105,34 @@
     }
 }
 
+/* gives the navbar space at the top of the page */
 body {
     padding-top: 70px;
+}
+
+.deletebtn {
+    background-color: #f44336;
+    color: white;
+    padding: 8px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.logoutbtn {
+    background-color: #f44336;
+    color: white;
+    padding: 8px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.listbtn {
+    background-color: #f44336;
+    color: white;
+    padding: 8px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
 }
