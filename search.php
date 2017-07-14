@@ -43,18 +43,15 @@ $searchName = $searchRow['userName'];
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
+
 </head>
 
 <body>
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h3 class="panel-title">Search And See Other Climbers' Sends!</h3>
-    </div>
-    <div class="panel-body">
-        <div class="well">
+<div id="mainTable" class="panel panel-primary">
+    <div id="mainTable" class="panel-body">
             <table class="table" id="mainTable">
-                <caption style="text-align:center">
+                <caption class="topCaption">
                     <h2><?php echo $searchName; ?>'s Sent Routes</h2>
                 </caption>
                 <tr>
@@ -65,51 +62,50 @@ $searchName = $searchRow['userName'];
                 <?php searchTable($link, $id, $searchId); ?>
             </table>
         </div>
-        <br><br>
     </div>
-    <div class="panel panel-success col-md-6">
-        <div class="panel-heading"><?php echo $searchName; ?>'s Overall Climbing Statistics!</div>
+<div id="overallPanel" class="panel panel-success col-md-6">
+    <div id="overallHead" class="panel-heading"><?php echo $searchName; ?>'s Overall Climbing Statistics!</div>
         <div class="panel-body">
             <p>Featured climbing stats according to <?php echo $searchName; ?>'s list of sent routes.</p>
         </div>
         <ul class="list-group">
-            <li class="list-group-item"><?php echo $searchName; ?>'s average grade is:
+            <li id="overallList" class="list-group-item"><?php echo $searchName; ?>'s average grade is:
                 V<?php getAvg($link, $searchId, $routesRes); ?>
             </li>
-            <li class="list-group-item"><?php echo $searchName; ?>'s highest grade is:
+            <li id="overallList" class="list-group-item"><?php echo $searchName; ?>'s highest grade is:
                 V<?php getMax($link, $searchId, $routesRes); ?>
             </li>
-            <li class="list-group-item"><?php echo $searchName; ?>'s lowest grade is:
+            <li id="overallList" class="list-group-item"><?php echo $searchName; ?>'s lowest grade is:
                 V<?php getMin($link, $searchId, $routesRes); ?></li>
         </ul>
     </div>
-    <div class="panel panel-success col-md-6">
-        <div class="panel-heading">Filter <?php echo $searchName; ?>'s Statistics!</div>
+<div id="filterPanel" class="panel panel-success col-md-6">
+    <div id="filterHead" class="panel-heading">Filter <?php echo $searchName; ?>'s Statistics!</div>
         <div class="panel-body">
             <p>Choose your time frame and find out <?php echo $searchName; ?>'s stats!</p>
-            <form name="Filter" method="POST">
-                From:
+            <form id="filterForm" name="Filter" method="POST">
+                <span id="filterInput">From:</span>
                 <input type="date" name="dateFrom" value="<?php echo date('Y-m-d'); ?>"/>
                 <br/>
-                To:
+                <span id="filterInput">To:</span>
                 <input type="date" name="dateTo" value="<?php echo date('Y-m-d'); ?>"/>
                 <input type="submit" name="search-filter" value="Filter"/>
             </form>
         </div>
         <ul class="list-group">
-            <li class="list-group-item"><?php echo $searchName; ?>'s average grade is: V<?php
+            <li id="filterList" class="list-group-item"><?php echo $searchName; ?>'s average grade is: V<?php
                 if (isset($_POST['search-filter'])) {
                     filterAvg($link, $searchId, $routesRes);
                 }
                 ?>
             </li>
-            <li class="list-group-item"><?php echo $searchName; ?>'s highest grade is: V<?php
+            <li id="filterList" class="list-group-item"><?php echo $searchName; ?>'s highest grade is: V<?php
                 if (isset($_POST['search-filter'])) {
                     filterMax($link, $searchId, $routesRes);
                 }
                 ?>
             </li>
-            <li class="list-group-item"><?php echo $searchName; ?>'s lowest grade is: V<?php
+            <li id="filterList" class="list-group-item"><?php echo $searchName; ?>'s lowest grade is: V<?php
                 if (isset($_POST['search-filter'])) {
                     filterMin($link, $searchId, $routesRes);
                 }
