@@ -226,6 +226,14 @@ function searchTable($link, $id, $searchId)
             echo "<td>";
             echo date('m-d-Y', strtotime($row['sentDate']));
             echo "</td>";
+            echo "</tr>";
+//            echo "<tr>";
+            echo "<td>";
+            echo "<form method='post' action='" . $PHP_SELF . "'>";
+            echo "Comment: <input class='comment' type='text' placeholder='Leave a comment!'" . ">";
+            echo "</td>";
+//            echo "</tr>";
+
         }
         $index++;
     }

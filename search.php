@@ -58,6 +58,7 @@ $searchName = $searchRow['userName'];
                     <th>Route/Problem Name</th>
                     <th>Grade</th>
                     <th>Date Sent</th>
+                    <!--                    <th>Comment</th>-->
                 </tr>
                 <?php searchTable($link, $id, $searchId); ?>
             </table>
@@ -85,11 +86,11 @@ $searchName = $searchRow['userName'];
             <p>Choose your time frame and find out <?php echo $searchName; ?>'s stats!</p>
             <form id="filterForm" name="Filter" method="POST">
                 <span id="filterInput">From:</span>
-                <input type="date" name="dateFrom" value="<?php echo date('Y-m-d'); ?>"/>
+                <input id="filterfield" type="date" name="dateFrom" value="<?php echo date('Y-m-d'); ?>"/>
                 <br/>
                 <span id="filterInput">To:</span>
-                <input type="date" name="dateTo" value="<?php echo date('Y-m-d'); ?>"/>
-                <input type="submit" name="search-filter" value="Filter"/>
+                <input id="filterfield" type="date" name="dateTo" value="<?php echo date('Y-m-d'); ?>"/>
+                <input id="filterfield" type="submit" name="search-filter" value="Filter"/>
             </form>
         </div>
         <ul class="list-group">

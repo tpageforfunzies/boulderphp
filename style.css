@@ -108,7 +108,7 @@
 /* gives the navbar space at the top of the page */
 body {
     padding-top: 70px;
-    background-color: cadetblue;
+    background-color: #285268;
 }
 
 .backbtn {
@@ -165,23 +165,41 @@ body {
     display: inline-block;
 }
 
+#navbarsubmitbutton {
+    background-color: #337ab7;
+}
+
+#navbarsubmitdrop {
+    background-color: #337ab7;
+    color: white;
+}
+
+#navbarsearch {
+    background-color: #5bc0de;
+}
+
+#navbarsearchdrop {
+    background-color: #5bc0de;
+    color: white;
+}
+
 #mainTable {
-    background-color: cadetblue;
+    background-color: #325E76;
     color: white;
 }
 
 #overallPanel, #overallHead, #overallList {
-    background-color: #3da06d;
+    background-color: #317C63;
     color: white;
 }
 
 #filterPanel, #filterHead, #filterList {
-    background-color: #3da06d;
+    background-color: #317C63;
     color: white;
 }
 
 #filterForm {
-    background-color: #3da06d;
+    background-color: #317C63;
     color: black;
 }
 
@@ -189,11 +207,24 @@ body {
     color: white;
 }
 
+#filterfield {
+    color: black;
+}
+
 .navbar {
-    background-color: aliceblue;
+    background-color: #267A5E;
+}
+
+#navbarbrand {
+    color: white;
 }
 
 .topCaption {
     text-align: center;
     color: white;
+}
+
+.comment {
+    background-color: white;
+    color: black;
 }
