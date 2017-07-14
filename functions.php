@@ -183,10 +183,8 @@ function getMin($link, $id, $routesRes)
 function tableGen($link, $id, $routesRes)
 {
     $index = 0;
-    $routesArray = [];
     $routesRes = mysqli_query($link, "SELECT * from routes ORDER by sentDate DESC");
     while ($row = mysqli_fetch_assoc($routesRes)) {
-        $routesArray[$index] = $row;
         if ($row['user'] == $id) {
             echo "<tr>";
             echo "<td>";
@@ -214,10 +212,8 @@ function searchTable($link, $id, $searchId)
 {
     //loops through routes, printing routes with matching userId
     $index = 0;
-    $searchArray = [];
     $routesRes = mysqli_query($link, "SELECT * from routes ORDER by sentDate DESC");
     while ($row = mysqli_fetch_assoc($routesRes)) {
-        $searchArray[$index] = $row;
         if ($row['user'] == $searchId) {
             echo "<tr>";
             echo "<td>";
@@ -233,6 +229,24 @@ function searchTable($link, $id, $searchId)
         }
         $index++;
     }
+
+}
+
+function listTable($link, $id)
+{
+    $index = 0;
+    $listRes = mysqli_query($link, "SELECT * FROM users");
+    while ($listRow = mysqli_fetch_assoc($listRes)) {
+        echo "<tr>";
+        echo "<td>";
+        echo $listRow['userName'];
+        echo "</td>";
+        echo "<td>";
+        echo $listRow['userEmail'];
+        echo "</td>";
+    }
+
+
 }
 
 ?>

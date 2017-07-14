@@ -109,7 +109,15 @@
 body {
     padding-top: 70px;
     background-color: cadetblue;
+}
 
+.backbtn {
+    background-color: #af43a1;
+    color: white;
+    padding: 8px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .deletebtn {
@@ -148,8 +156,36 @@ body {
     display: inline-block;
 }
 
+.signupbtn {
+    background-color: #af535e;
+    color: white;
+    padding: 8px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
 #mainTable {
     background-color: cadetblue;
+    color: white;
+}
+
+#overallPanel, #overallHead, #overallList {
+    background-color: #3da06d;
+    color: white;
+}
+
+#filterPanel, #filterHead, #filterList {
+    background-color: #3da06d;
+    color: white;
+}
+
+#filterForm {
+    background-color: #3da06d;
+    color: black;
+}
+
+#filterInput {
     color: white;
 }
 
@@ -157,6 +193,7 @@ body {
     background-color: aliceblue;
 }
 
-.panel-primary {
-    background-color: black;
+.topCaption {
+    text-align: center;
+    color: white;
 }
