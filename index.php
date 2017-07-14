@@ -62,11 +62,20 @@ if (isset($_POST['btn-login'])) {
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
         <title>BoulderTracker</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        <script
+                src="https://code.jquery.com/jquery-3.2.1.min.js"
+                integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+                crossorigin="anonymous"></script>
+        <script
+                src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+                crossorigin="anonymous"></script>
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
               integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
               crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
 
@@ -76,18 +85,18 @@ if (isset($_POST['btn-login'])) {
             <h1>What's Up! Thanks for trying out the app!</h1>
 
             <p>This is where I'll periodically post updates about what has changed or is being worked on.</p>
-            <p>Current Version: 1.2</p><br>
+            <p>Current Version: 1.3</p><br>
             Recent Changes:
             <ul>
                 <li>Search should completely work now! <br> (try it with "tjpage@indiana.edu" or "test@tester.com")</li>
-                <li>Navigation bar for top of screen will now control route submission, search, and logging out</li>
+                <li>Navigation bar for top of screen will now control app functionality</li>
                 <li>Minor optimization changes, should be slightly faster to load</li>
+                <li>User List is complete, see who is using the app and search them to see their climbs!</li>
             </ul>
 
             In Progress:
             <ul>
                 <li>Commenting on other people's climbs</li>
-                <li>Getting List of Users</li>
                 <li>User profile pages</li>
                 <li>Password Recovery/Change</li>
             </ul>
@@ -151,7 +160,7 @@ if (isset($_POST['btn-login'])) {
                     </div>
 
                     <div class="form-group">
-                        <a href="register.php">Sign Up Here</a>
+                        <a class="signupbtn" href="register.php">Sign Up Here</a>
                     </div>
 
                 </div>
