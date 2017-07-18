@@ -21,6 +21,7 @@ if (!$searchRow) {
 }
 $searchId = $searchRow['userId'];
 $searchName = $searchRow['userName'];
+
 ?>
 
 <!DOCTYPE html>
@@ -33,11 +34,15 @@ $searchName = $searchRow['userName'];
     <script
             src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-            crossorigin="anonymous"></script>
+            crossorigin="anonymous">
+
+    </script>
     <script
             src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+            crossorigin="anonymous">
+
+    </script>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -58,7 +63,6 @@ $searchName = $searchRow['userName'];
                     <th>Route/Problem Name</th>
                     <th>Grade</th>
                     <th>Date Sent</th>
-                    <!--                    <th>Comment</th>-->
                 </tr>
                 <?php searchTable($link, $id, $searchId); ?>
             </table>
@@ -114,6 +118,13 @@ $searchName = $searchRow['userName'];
         </ul>
     </div>
 
-
 </body>
+
+<script language='Javascript'>
+
+    $("#commentbtn").click(function () {
+        console.log("clicked!");
+
+    });
+</script>
 </html>
