@@ -53,6 +53,26 @@ if (isset($_POST['btn-route'])) {
     }
 }
 
+
+//if (isset($_POST['btn-comment'])) {
+//    //set and sanitize email from input
+//    $search = $_SESSION['search'];
+//    $search = mysqli_real_escape_string($link, $search);
+//
+////gets userId and userName of searched e-mail
+//    $searchRes = mysqli_query($link, "SELECT * FROM users WHERE userEmail='$search'");
+//    $searchRow = mysqli_fetch_array($searchRes);
+//
+//    $searchId = $searchRow['userId'];
+//    $searchName = $searchRow['userName'];
+//
+//    $comment = mysqli_real_escape_string($link, $_POST['comment']);
+//    $commentQuery = "INSERT INTO routes(comment) VALUE('$comment') WHERE user='$searchId'";
+//    $commentRes = mysqli_query($link, $commentQuery);
+//
+//
+//}
+
 function filterAvg($link, $id, $routesRes)
 {
     $fromDate = ($_POST['dateFrom']);
@@ -217,7 +237,8 @@ function searchTable($link, $id, $searchId)
         if ($row['user'] == $searchId) {
             echo "<tr>";
             echo "<td>";
-            echo $row['routeName'];
+            echo $row['routeName'] . "   ";
+            echo "</button>";
             echo "</td>";
             echo "<td>";
             echo "V";
@@ -227,13 +248,14 @@ function searchTable($link, $id, $searchId)
             echo date('m-d-Y', strtotime($row['sentDate']));
             echo "</td>";
             echo "</tr>";
-//            echo "<tr>";
+            echo "<tr>";
             echo "<td>";
-            echo "<form method='post' action='" . $PHP_SELF . "'>";
-            echo "Comment: <input class='comment' type='text' placeholder='Leave a comment!'" . ">";
+            echo "<form method='post' action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "'>";
+            echo "<input class='comment' type='text' name ='comment' placeholder='Leave a comment!'>";
+            echo "<button id='filterfield' type='submit' value='Submit' name='btn-comment'>Comment</button>";
+            echo "</form>";
             echo "</td>";
-//            echo "</tr>";
-
+            echo "</tr>";
         }
         $index++;
     }
@@ -257,4 +279,8 @@ function listTable($link, $id)
 
 }
 
+
 ?>
+
+
+
