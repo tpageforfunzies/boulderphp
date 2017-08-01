@@ -251,7 +251,7 @@ function searchTable($link, $id, $searchId)
             echo "<tr>";
             echo "<td>";
             echo "<form method='post' action='" . htmlspecialchars($_SERVER['PHP_SELF']) . "'>";
-            echo "Comment: <input class='comment' type='text' name ='comment' placeholder='Leave a comment!'>";
+            echo "<input class='comment' type='text' name ='comment' placeholder='Leave a comment!'>";
             echo "<button id='filterfield' type='submit' value='Submit' name='btn-comment'>Comment</button>";
             echo "</form>";
             echo "</td>";
